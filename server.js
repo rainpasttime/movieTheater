@@ -42,41 +42,46 @@ app.use(orm.express('sqlite:/home/rain/movieTheater/DB/movies.db',{
 app.post('/index', (req, res) => {
     let findOne = req.body.genres;
     let genreID;
-    let movieGet = [];
+    let movieSet = [];
     // movieGet.push("a");
     // console.log(findOne);
     req.models.genre.find({name:findOne},function (err,genre) {
         if(err) console.log("error...One");
+        //获得的电影类型的id
         genreID = genre[0].id;
         // console.log(genre[0].id);
         req.models.movie_genre.find({genre_id:genreID},function (err,movieID) {
             if(err) console.log("error...Two");
-            for(let i=0;i<movieID.length;i++){
-                req.models.movie.find({id:movieID[i].movie_id},function (err,movieInfo) {
-                    if(err)
-                        console.log("error...Three");
-                    let newGet={};
-                    newGet.id = movieInfo[0].id;
-                    newGet.alt = movieInfo[0].alt;
-                    newGet.year = movieInfo[0].year;
-                    newGet.title = movieInfo[0].title;
-                    newGet.rating = movieInfo[0].rating;
-                    newGet.original_title = movieInfo[0].original_title;
-                    newGet.directors = movieInfo[0].directors;
-                    newGet.casts = movieInfo[0].casts;
-                    newGet.image = movieInfo[0].image;
-                    movieGet.push(newGet);
-                    // console.log(newGet);
-                    // console.log(movieInfo[0].id);
-                });
-            }
+            // for(let i=0;i<movieID.length;i++){
+            //     req.models.movie.find({id:movieID[i].movie_id},function (err,movieInfo) {
+            //         if(err)
+            //             console.log("error...Three");
+            //         let newGet={};
+            //         newGet.id = movieInfo[0].id;
+            //         newGet.alt = movieInfo[0].alt;
+            //         newGet.year = movieInfo[0].year;
+            //         newGet.title = movieInfo[0].title;
+            //         newGet.rating = movieInfo[0].rating;
+            //         newGet.original_title = movieInfo[0].original_title;
+            //         newGet.directors = movieInfo[0].directors;
+            //         newGet.casts = movieInfo[0].casts;
+            //         newGet.image = movieInfo[0].image;
+            //         movieGet.push(newGet);
+            //         movieGet.push(i.toString());
+            //         // console.log(newGet);
+            //         // console.log(movieInfo[0].id);
+            //     });
+            // }
+            for(let i = 0;i<movieID.length;i++)
+                movieSet.push(movieID[i].movie_id);
+            req.models.movie.find({id:movieSet},function (err,movieInfo) {
+                if (err) console.log("error...Three");
+                console.log("movieInfo");
+                console.log(movieInfo);
+                res.send(movieInfo);
+            });
         });
     });
-    movieGet.push("what");
-    console.log("movieGet")
-    console.log(movieGet);
-    res.send(movieGet);
-    //res.sendFile('index.html', {root: './'});
 });
 
 app.listen(3000, () => {
