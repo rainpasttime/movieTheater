@@ -77,7 +77,10 @@ app.post('/index', (req, res) => {
             req.models.movie.find({id:movieSet},function (err,movieInfo) {
                 if (err) console.log("error...Three");
                 console.log("movieInfo");
-                console.log(movieInfo);
+                // console.log(movieInfo);
+                // console.log(movieInfo[0].id);
+                // console.log(movieInfo[0].title);
+                // console.log(typeof movieInfo[0]);
                 res.send(movieInfo);
             });
         });
