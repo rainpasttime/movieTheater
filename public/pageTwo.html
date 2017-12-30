@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>修改</title>
+	<!--引用的bootstrap和JQuery-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+		body{
+            padding-top: 100px;
+            padding-right: 50px;
+            padding-left: 50px;
+            background-color: #AAAAAA;
+        }
+		#sample-1{
+            margin-top: 50px;
+        }
+        img.slider{
+            width:560px;
+            height: 420px;
+        }
+        img.MovieP{
+        	width: 195px;
+        	height:300px
+        }
+        p{
+        	font-size: 17px;
+        }
+        div.row{
+        	margin-top: 20px;
+        }
+
+	</style>
+</head>
+<body>
+    <!--上搜索栏-->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href=" " target="_blank">首页</a >
+        </div>
+        <div>
+            <form class="navbar-form navbar-left" role="search">
+                <input type="text" class="form-control" placeholder="Search" id="searchContention">
+                <input type="button" class="btn btn-default btn-md" id="searchButton" value="Search">
+            </form>
+        </div>
+    </div>
+    </nav>
+    <div class="container">
+    <div class="row">
+	    <!--电影封面-->
+	    <div class="col-md-4">
+	    	<img src="../img/poster01.jpg" class="MovieP">
+	    </div>
+	    <!--电影详细信息-->
+	    <div class="col-md-8" id="details">
+	    <p id="director">导演：弗兰克·卡普拉</p>
+	    <p id="actor">主演：詹姆斯·史都华，唐娜·里德，莱昂纳尔·巴里摩尔</p>
+	    <p id="time">时间：130分钟</p>
+	    <p id="type">分类：剧情</p>
+	    </div>
+    </div>
+    <!--剧情介绍-->
+    <div class="row">
+	    <div clas="col-md-4"></div>
+	    <div class="col-md-8" id="info">
+	    	<p id="play">剧情：乔治（詹姆斯·斯图尔特饰）在圣诞节前准备自杀，这时上帝传来旨意，派天使拯救他，并让他了解到自己一生的使命——拯救那些不幸的人。乔治小时候左耳有疾，在贝德福德镇上的一家药店帮工。他很机灵，深得老板器重，同时也很招女孩喜欢。某日，老板接到爱子死亡的电报，悲痛欲绝，配错了药，幸亏乔治才化险为夷。乔治从小嫉恶如仇，尤其看不惯富人专横跋扈。长大后，乔治一表人材，准备去读大学。这时，他的父亲去世了，他子承父业，协助叔父料理公司事务。然而公司经营状况不佳，在董事会会议上面临破产。如果公司破产，小镇将会有很多家庭陷入困境。乔治力排众议，说服了董事会，但是条件是他要担任董事会秘书长。这与他的大学梦相去甚远。而且，此时他还陷入了对一个女孩的爱恋之中。</p>
+	    </div>
+    </div>
+    <!--影评-->
+    <div class="row" id="comment">
+    </div>
+    <!--类似电影推荐-->
+    <div class="row" id="otherMovie">
+    </div>
+    </div>
+</body>
+</html>
