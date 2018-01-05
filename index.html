@@ -67,27 +67,27 @@
                         <li class="nav-item">
                         <a href="#"><i class="my-icon nav-icon icon_1"></i><span>全部类型</span><i class="my-icon nav-more"></i></a>
                         <ul>
-                            <li><a href="#" class="type" id="juqing"><span>剧情</span></a></li>
-                            <li><a href="#" class="type" id="aiqing"><span>爱情</span></a></li>
-                            <li><a href="#" class="type" id="xiju"><span>喜剧</span></a></li>
-                            <li><a href="#" class="type" id="kehuan"><span>科幻</span></a></li>
-                            <li><a href="#" class="type" id="donghua"><span>动画</span></a></li>
-                            <li><a href="#" class="type" id="dongzuo"><span>动作</span></a></li>
-                            <li><a href="#" class="type" id="xuanyi"><span>悬疑</span></a></li>
+                            <li><a href="#" id="juqing"><span>剧情</span></a></li>
+                            <li><a href="#" id="aiqing"><span>爱情</span></a></li>
+                            <li><a href="#" id="xiju"><span>喜剧</span></a></li>
+                            <li><a href="#" id="kehuan"><span>科幻</span></a></li>
+                            <li><a href="#" id="donghua"><span>动画</span></a></li>
+                            <li><a href="#" id="dongzuo"><span>动作</span></a></li>
+                            <li><a href="#" id="xuanyi"><span>悬疑</span></a></li>
                         </ul>
                         </li>
                         <li class="nav-item">
                         <a href="#"><i class="my-icon nav-icon icon_2"></i><span>全部地区</span><i class="my-icon nav-more"></i></a>
                         <ul>
-                            <li><a href="#"><span>大陆</span></a></li>
-                            <li><a href="#"><span>香港</span></a></li>
-                            <li><a href="#"><span>美国</span></a></li>
-                            <li><a href="#"><span>台湾</span></a></li>
-                            <li><a href="#"><span>日本</span></a></li>
-                            <li><a href="#"><span>韩国</span></a></li>
-                            <li><a href="#"><span>英国</span></a></li>
-                            <li><a href="#"><span>法国</span></a></li>
-                            <li><a href="#"><span>其他</span></a></li>
+                            <li><a href="#" id="China"><span>大陆</span></a></li>
+                            <li><a href="#" id="HongKong"><span>香港</span></a></li>
+                            <li><a href="#" id="America"><span>美国</span></a></li>
+                            <li><a href="#" id="Taiwan"><span>台湾</span></a></li>
+                            <li><a href="#" id="Janpan"><span>日本</span></a></li>
+                            <li><a href="#" id="Korea"><span>韩国</span></a></li>
+                            <li><a href="#" id="England"><span>英国</span></a></li>
+                            <li><a href="#" id="France"><span>法国</span></a></li>
+                            <li><a href="#" id="another"><span>其他</span></a></li>
                         </ul>
                         </li>
                     </ul>
@@ -312,9 +312,12 @@
     $(window).on('load', function () {
         $('.ma5slider').ma5slider();
     });
-    function TypeClick(type){
+    function TypeClick(search,tag){
         let searchType = {};
-        searchType.genres = type;
+        if(tag===1)
+            searchType.genres = search;
+        else
+            searchType.area = search;
         $.ajax({
                 type: "post",
                 url: "http://localhost:3000/index",
@@ -324,7 +327,8 @@
                     if (data.length>0) {
                         let add = "";
                         let tem;
-                        for(let i =1;i<data.length;i++){
+                        let length = 31<data.length?31:data.length;
+                        for(let i =1;i<length;i++){
                             if(i%3===1)
                                 add+="<div class=\"row wrapper\">";
                             tem="";
@@ -362,25 +366,53 @@
 
     $(document).ready(function(){
         $("#juqing").click(function(){
-            TypeClick("剧情");
+            TypeClick("剧情",1);
         });
         $("#aiqing").click(function(){
-            TypeClick("爱情");
+            TypeClick("爱情",1);
         });
         $("#xiju").click(function(){
-            TypeClick("喜剧");
+            TypeClick("喜剧",1);
         });
         $("#kehuan").click(function(){
-            TypeClick("科幻");
+            TypeClick("科幻",1);
         });
         $("#donghua").click(function(){
-            TypeClick("动画");
+            TypeClick("动画",1);
         });
         $("#dongzuo").click(function(){
-            TypeClick("动作");
+            TypeClick("动作",1);
         });
         $("#xuanyi").click(function(){
-            TypeClick("悬疑");
+            TypeClick("悬疑",1);
+        });
+
+        $("#China").click(function(){
+            TypeClick("大陆",0);
+        });
+        $("#HongKong").click(function(){
+            TypeClick("香港",0);
+        });
+        $("#America").click(function(){
+            TypeClick("美国",0);
+        });
+        $("#Taiwan").click(function(){
+            TypeClick("台湾",0);
+        });
+        $("#Janpan").click(function(){
+            TypeClick("日本",0);
+        });
+        $("#Korea").click(function(){
+            TypeClick("韩国",0);
+        });
+        $("#England").click(function(){
+            TypeClick("英国",0);
+        });
+        $("#France").click(function(){
+            TypeClick("法国",0);
+        });
+        $("#another").click(function(){
+            TypeClick("其他",0);
         });
     });
 
