@@ -22,7 +22,8 @@ app.use(orm.express('sqlite:/home/rain/movieTheater/DB/movies.db',{
             original_title:String,
             directors:String,
             casts:String,
-            image:String
+            image:String,
+            area:String
         });
         models.genre = db.define("genre", {
             id: Number,
@@ -88,6 +89,7 @@ app.post('/index', (req, res) => {
                     console.log("movieInfo");
                     for(let j =0;j<movieInfo.length;j++){
                         console.log(movieInfo[j].title);
+                        console.log(movieInfo[j].area);
                     }
                     res.send(movieInfo);
                 });
