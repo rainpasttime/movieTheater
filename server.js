@@ -6,12 +6,12 @@ app.use(express.static(__dirname+'/'));
 app.use(bodyParser.urlencoded({ extended: true }));
 let orm = require("orm");
 
-orm.connect('sqlite:/home/rain/movieTheater/DB/movies.db', function(err, db) {
+orm.connect('sqlite:/home/rain/JQueryMovie/DB/movies.db', function(err, db) {
     if (err) return console.error('Connection error: ' + err);
     else console.log('success!');
 });
 
-app.use(orm.express('sqlite:/home/rain/movieTheater/DB/movies.db',{
+app.use(orm.express('sqlite:/home/rain/JQueryMovie/DB/movies.db',{
     define: function (db, models, next) {
         models.movie = db.define("movie", {
             id: Number,
@@ -97,6 +97,25 @@ app.post('/index', (req, res) => {
         });
     }
 });
+
+
+app.post('/search', (req, res) => {
+    let searchName = req.body.data;
+    console.log("searchName");
+    console.log(searchName);
+    req.models.movie.find({title:orm.like("%"+searchName+"%")},function (err,movies) {
+        if(err) console.log("error...One");
+        else {
+            console.log("movies in search");
+            console.log(movies.length);
+            for (let i = 0; i < movies.length; i++) {
+                console.log(movies[i].title);
+            }
+            res.send(movies);
+        }
+    });
+});
+
 
 app.listen(3000, () => {
     console.log('running on port 3000...');
