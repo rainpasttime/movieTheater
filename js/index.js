@@ -77,57 +77,52 @@ function TypeClick(search,tag){
         }
     });
 }
+let typeID = ["juqing","aiqing","xiju","kehuan","donghua","dongzuo","xuanyi"];
+let typeSearch = ["剧情","爱情","喜剧","科幻","动画","动作","悬疑"];
+let areaID =["China","HongKong","America","Taiwan","Janpan","Korea","England","France","another"];
+let areaSearch = ["大陆","香港","美国","台湾","日本","英国","法国","其他"];
 
 $(document).ready(function(){
-    $("#juqing").click(function(){
-        TypeClick("剧情",1);
-    });
-    $("#aiqing").click(function(){
-        TypeClick("爱情",1);
-    });
-    $("#xiju").click(function(){
-        TypeClick("喜剧",1);
-    });
-    $("#kehuan").click(function(){
-        TypeClick("科幻",1);
-    });
-    $("#donghua").click(function(){
-        TypeClick("动画",1);
-    });
-    $("#dongzuo").click(function(){
-        TypeClick("动作",1);
-    });
-    $("#xuanyi").click(function(){
-        TypeClick("悬疑",1);
-    });
 
-    $("#China").click(function(){
-        TypeClick("大陆",0);
-    });
-    $("#HongKong").click(function(){
-        TypeClick("香港",0);
-    });
-    $("#America").click(function(){
-        TypeClick("美国",0);
-    });
-    $("#Taiwan").click(function(){
-        TypeClick("台湾",0);
-    });
-    $("#Janpan").click(function(){
-        TypeClick("日本",0);
-    });
-    $("#Korea").click(function(){
-        TypeClick("韩国",0);
-    });
-    $("#England").click(function(){
-        TypeClick("英国",0);
-    });
-    $("#France").click(function(){
-        TypeClick("法国",0);
-    });
-    $("#another").click(function(){
-        TypeClick("其他",0);
-    });
+    for(let t=0;t<typeID.length;t++){
+        let search = "#"+typeID[t];
+        $(search).click(function(){
+           TypeClick(typeSearch[t],1);
+        });
+    }
+
+
+    for(let t=0;t<areaID.length;t++){
+        let search = "#"+areaID[t];
+        $(search).click(function(){
+            TypeClick(areaSearch[t],0);
+        });
+    }
+
+    // //负责显示匹配名字
+    // $("#searchContention").keydown(function() {
+    //     let searchContention = $("#searchContention").val();
+    //     $.ajax({
+    //         type: "post",
+    //         url: "http://localhost:3000/search",
+    //         dataType: "json",
+    //         data: {data:searchContention},
+    //         success: function (data) {
+    //             let names =[];
+    //             for(let j=0;j<data.length;j++){
+    //                 names.push(data[j].title);
+    //             }
+    //             let tem;
+    //             tem = "<select multiple class=\"form-control\">";
+    //             for(let j=0;j<data.length;j++){
+    //                 tem+="<option>"+names[j]+"</option>";
+    //             }
+    //             tem+="</<select>"
+    //             $("#formChange").html(tem);
+    //         }
+    //     });
+    // });
+
     $("#searchButton").click(function(){
         let searchContention = $("#searchContention").val();
         $.ajax({
