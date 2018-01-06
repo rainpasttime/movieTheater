@@ -165,33 +165,6 @@ Generate "lighting" using box shadows
 	box-shadow: inset 0px 0px 40px rgba(0,0,0,0);
 }
 
-/*************************************
-Posters and still images
-*************************************
-
-.scene:nth-child(1).movie.poster {
-  background-image: url(../img/poster01.jpg);
-}
-
-.scene:nth-child(2).poster {
-  background-image: url(../img/poster02.jpg);
-}
-
-.scene:nth-child(3).poster {
-  background-image: url(../img/poster03.jpg);
-}
-
-.scene:nth-child(1).info header {
-	background-image: url(../img/still01.jpg);
-}
-
-.scene:nth-child(2).info header {
-	background-image: url(../img/still02.jpg);
-}
-
-.scene:nth-child(3).info header {
-	background-image: url(../img/still03.jpg);
-}*/
 
 /*************************************
 Fallback

@@ -19,6 +19,9 @@ function displayMovie(data){
                 data[i-1].image.toString()+
                 "\" style=\"width: 260px;height: 400px\" alt=\""+data[i-1].title.toString()+"\">"+
                 "</div>" +
+                "<a href=\"pageTwo.html?name="+
+                data[i-1].title.toString()+
+                "\">"+
                 "<div class=\"info\">" +
                 "<header>" +
                 "<h1>name:  " +
@@ -44,6 +47,7 @@ function displayMovie(data){
                 "</span>"+
                 "</header>\n" +
                 "</div>" +
+                "</a>"+
                 "</div>" +
                 "</div>" +
                 "</div>";
@@ -99,30 +103,6 @@ $(document).ready(function(){
         });
     }
 
-    // //负责显示匹配名字
-    // $("#searchContention").keydown(function() {
-    //     let searchContention = $("#searchContention").val();
-    //     $.ajax({
-    //         type: "post",
-    //         url: "http://localhost:3000/search",
-    //         dataType: "json",
-    //         data: {data:searchContention},
-    //         success: function (data) {
-    //             let names =[];
-    //             for(let j=0;j<data.length;j++){
-    //                 names.push(data[j].title);
-    //             }
-    //             let tem;
-    //             tem = "<select multiple class=\"form-control\">";
-    //             for(let j=0;j<data.length;j++){
-    //                 tem+="<option>"+names[j]+"</option>";
-    //             }
-    //             tem+="</<select>"
-    //             $("#formChange").html(tem);
-    //         }
-    //     });
-    // });
-
     $("#searchButton").click(function(){
         let searchContention = $("#searchContention").val();
         $.ajax({
@@ -133,6 +113,10 @@ $(document).ready(function(){
             success: function (data) {
                 displayMovie(data);
             }
-        })
+        });
     });
+
+    $(".info").click(function(){
+        window.location.href="./pageTwo.html";
+    })
 });

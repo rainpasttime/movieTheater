@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zuoyoufei/Player.git"
+    "url": "https://github.com/rainpasttime/movieTheater"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zuoyoufei/Player/issues"
+    "url": "https://github.com/rainpasttime/movieTheater"
   },
-  "homepage": "https://github.com/zuoyoufei/Player#readme",
+  "homepage": "https://github.com/rainpasttime/movieTheater/blob/master/README.md",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
