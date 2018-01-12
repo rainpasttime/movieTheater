@@ -6,8 +6,7 @@ function displayMovie(data){
     if (data.length>0) {
         let add = "";
         let tem;
-        let length = 31<data.length?31:data.length;
-        for(let i =1;i-1<length;i++){
+        for(let i =1;i-1<data.length;i++){
             if(i%3===1)
                 add+="<div class=\"row wrapper\">";
             tem="";
@@ -19,8 +18,8 @@ function displayMovie(data){
                 data[i-1].image.toString()+
                 "\" style=\"width: 260px;height: 400px\" alt=\""+data[i-1].title.toString()+"\">"+
                 "</div>" +
-                "<a href=\"pageTwo.html?name="+
-                data[i-1].title.toString()+
+                "<a href=\"pageTwo.html?id="+
+                data[i-1].id.toString()+
                 "\">"+
                 "<div class=\"info\">" +
                 "<header>" +
@@ -60,9 +59,6 @@ function displayMovie(data){
     else if(data.length===0){
         alert("NULL");
     }
-    else{
-        alert("what");
-    }
 }
 
 function TypeClick(search,tag){
@@ -84,10 +80,11 @@ function TypeClick(search,tag){
 let typeID = ["juqing","aiqing","xiju","kehuan","donghua","dongzuo","xuanyi"];
 let typeSearch = ["剧情","爱情","喜剧","科幻","动画","动作","悬疑"];
 let areaID =["China","HongKong","America","Taiwan","Janpan","Korea","England","France","another"];
-let areaSearch = ["大陆","香港","美国","台湾","日本","英国","法国","其他"];
+let areaSearch = ["大陆","香港","美国","台湾","日本","韩国","英国","法国","其他"];
 
 $(document).ready(function(){
 
+    //侧边导航栏中的分类栏的点击事件
     for(let t=0;t<typeID.length;t++){
         let search = "#"+typeID[t];
         $(search).click(function(){
@@ -95,28 +92,39 @@ $(document).ready(function(){
         });
     }
 
-
+    //侧边导航栏中的地区栏的点击事件
     for(let t=0;t<areaID.length;t++){
         let search = "#"+areaID[t];
         $(search).click(function(){
             TypeClick(areaSearch[t],0);
         });
     }
-
-    $("#searchButton").click(function(){
-        let searchContention = $("#searchContention").val();
-        $.ajax({
-            type: "post",
-            url: "http://localhost:3000/search",
-            dataType: "json",
-            data: {data:searchContention},
-            success: function (data) {
-                displayMovie(data);
-            }
-        });
+});
+//上搜索栏的搜索事件实现
+$("#searchButton").click(function(){
+    let searchContention = $("#searchContention").val();
+    $.ajax({
+        type: "post",
+        url: "http://localhost:3000/search",
+        dataType: "json",
+        data: {data:searchContention},
+        success: function (data) {
+            displayMovie(data);
+        }
     });
-
-    $(".info").click(function(){
-        window.location.href="./pageTwo.html";
-    })
+});
+//点击全部电影按钮
+$("#allmovie").click(function(){
+    $.ajax({
+        type: "get",
+        url: "http://localhost:3000/allMovie",
+        dataType: "json",
+        success: function (data) {
+            let part = [];
+            for(let i=0;i<50;i++){
+                part.push(data[i]);
+            }
+            displayMovie(part);
+        }
+    });
 });

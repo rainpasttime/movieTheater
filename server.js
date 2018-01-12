@@ -6,12 +6,12 @@ app.use(express.static(__dirname+'/'));
 app.use(bodyParser.urlencoded({ extended: true }));
 let orm = require("orm");
 
-orm.connect('sqlite:/home/rain/movieTheater/DB/movies.db', function(err, db) {
+orm.connect('sqlite:/home/rain/JQueryMovie/DB/movies.db', function(err, db) {
     if (err) return console.error('Connection error: ' + err);
     else console.log('success!');
 });
 
-app.use(orm.express('sqlite:/home/rain/movieTheater/DB/movies.db',{
+app.use(orm.express('sqlite:/home/rain/JQueryMovie/DB/movies.db',{
     define: function (db, models, next) {
         models.movie = db.define("movie", {
             id: Number,
@@ -22,7 +22,8 @@ app.use(orm.express('sqlite:/home/rain/movieTheater/DB/movies.db',{
             directors:String,
             casts:String,
             image:String,
-            area:String
+            area:String,
+            play:String
         });
         models.genre = db.define("genre", {
             id: Number,
@@ -41,6 +42,10 @@ app.use(orm.express('sqlite:/home/rain/movieTheater/DB/movies.db',{
             id: Number,
             movie_id:Number,
             area_id:Number
+        });
+        models.comment = db.define("comment", {
+            id: Number,
+            comments:String
         });
         next();
     }
@@ -116,13 +121,13 @@ app.post('/search', (req, res) => {
 });
 
 app.post('/pageTwo', (req, res) => {
-    let searchName = req.body.data;
+    let searchID = req.body.data;
     // console.log("search pageTwo");
     // console.log(searchName);
-    req.models.movie.find({title:searchName},function (err,movies) {
+    req.models.movie.find({id:searchID},function (err,movies) {
         if(err) console.log("error...One");
         else {
-            req.models.movie_genre.find({movie_id:movies[0].id},function (err,genreID) {
+            req.models.movie_genre.find({movie_id:searchID},function (err,genreID) {
                 let genreSet = [];
                 for(let i = 0;i<genreID.length;i++)
                     genreSet.push(genreID[i].genre_id);
@@ -133,7 +138,13 @@ app.post('/pageTwo', (req, res) => {
                     req.models.movie.find({id:movieSet},function(err,likeMovie){
                         // console.log("likeMovie");
                         // console.log(likeMovie[0].title);
-                        res.send({details:movies,like:likeMovie});
+                        req.models.comment.find({id:searchID},function(err,comments){
+                            let arrayOfC = [];
+                            for(let i=0;i<comments.length;i++){
+                                arrayOfC.push(comments[i].comments);
+                            }
+                            res.send({details:movies,like:likeMovie,comments:arrayOfC});
+                        });
                     });
                 });
             });
@@ -141,6 +152,34 @@ app.post('/pageTwo', (req, res) => {
     });
 });
 
+app.post('/addComment', (req, res) => {
+    console.log("add comment");
+    console.log(req.body.data);
+    console.log(req.body.id);
+    
+    let insertComment = {};
+    insertComment.id = req.body.id;
+    insertComment.comments = req.body.data;
+    req.models.comment.create(insertComment,function (err,comments) {
+        console.log("comments");
+        console.log(comments);
+        res.send(comments);
+    });
+});
+
+app.get('/allMovie', (req, res) => {
+    
+    req.models.movie.all(function (err,movies) {
+        // console.log("movies");
+        // console.log(movies);
+        // res.send(comments);
+        console.log("in");
+        for(let i=0;i<10;i++){
+            console.log(movies[i].title);
+        }
+        res.send(movies);
+    });
+});
 
 app.listen(3000, () => {
     console.log('running on port 3000...');
