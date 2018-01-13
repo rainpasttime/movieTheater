@@ -45,7 +45,8 @@ app.use(orm.express('sqlite:/home/rain/JQueryMovie/DB/movies.db',{
         });
         models.comment = db.define("comment", {
             id: Number,
-            comments:String
+            comments:String,
+            comment_id:Number
         });
         next();
     }
@@ -128,21 +129,27 @@ app.post('/pageTwo', (req, res) => {
         if(err) console.log("error...One");
         else {
             req.models.movie_genre.find({movie_id:searchID},function (err,genreID) {
+                if(err) console.log(err);
                 let genreSet = [];
                 for(let i = 0;i<genreID.length;i++)
                     genreSet.push(genreID[i].genre_id);
+                console.log("One!!!");
+                console.log(genreSet);
                 req.models.movie_genre.find({genre_id:genreSet},function(err,movieID){
+                    if(err) console.log(err);
                     let movieSet = [];
                     for(let i = 0;i<movieID.length;i++)
                         movieSet.push(movieID[i].movie_id);
                     req.models.movie.find({id:movieSet},function(err,likeMovie){
-                        // console.log("likeMovie");
-                        // console.log(likeMovie[0].title);
+                        if(err) console.log(err);
+                        console.log("likeMovie");
+                        console.log(likeMovie[0].title);
                         req.models.comment.find({id:searchID},function(err,comments){
                             let arrayOfC = [];
                             for(let i=0;i<comments.length;i++){
                                 arrayOfC.push(comments[i].comments);
                             }
+                            console.log(arrayOfC);
                             res.send({details:movies,like:likeMovie,comments:arrayOfC});
                         });
                     });
@@ -161,6 +168,7 @@ app.post('/addComment', (req, res) => {
     insertComment.id = req.body.id;
     insertComment.comments = req.body.data;
     req.models.comment.create(insertComment,function (err,comments) {
+        if(err) console.log(err);
         console.log("comments");
         console.log(comments);
         res.send(comments);
