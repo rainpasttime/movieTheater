@@ -68,7 +68,6 @@ app.post('/index', (req, res) => {
                     movieSet.push(movieID[i].movie_id);
                 req.models.movie.find({id:movieSet},function (err,movieInfo) {
                     if (err) console.log("error...Three");
-                    // console.log("movieInfo");
                     res.send(movieInfo);
                 });
             });
@@ -82,8 +81,6 @@ app.post('/index', (req, res) => {
             if(err) console.log("error...One");
             //获得的电影类型的id
             areaID = area[0].id;
-            // console.log("area[0].id");
-            // console.log(area[0].id);
             req.models.movie_area.find({area_id:areaID},function (err,movieID) {
                 if(err) console.log("error...Two");
                 for(let i = 0;i<movieID.length;i++){
@@ -91,11 +88,6 @@ app.post('/index', (req, res) => {
                 }
                 req.models.movie.find({id:movieSet},function (err,movieInfo) {
                     if (err) console.log("error...Three");
-                    // console.log("movieInfo");
-                    // for(let j =0;j<movieInfo.length;j++){
-                    //     console.log(movieInfo[j].title);
-                    //     console.log(movieInfo[j].area);
-                    // }
                     res.send(movieInfo);
                 });
             });
@@ -106,16 +98,12 @@ app.post('/index', (req, res) => {
 
 app.post('/search', (req, res) => {
     let searchName = req.body.data;
-    // console.log("searchName");
-    // console.log(searchName);
+    console.log("searchName");
+    console.log(searchName);
     req.models.movie.find({title:orm.like("%"+searchName+"%")},function (err,movies) {
         if(err) console.log("error...One");
         else {
-            // console.log("movies in search");
-            // console.log(movies.length);
-            // for (let i = 0; i < movies.length; i++) {
-            //     console.log(movies[i].title);
-            // }
+            console.log(movies);
             res.send(movies);
         }
     });
@@ -123,8 +111,6 @@ app.post('/search', (req, res) => {
 
 app.post('/pageTwo', (req, res) => {
     let searchID = req.body.data;
-    // console.log("search pageTwo");
-    // console.log(searchName);
     req.models.movie.find({id:searchID},function (err,movies) {
         if(err) console.log("error...One");
         else {
@@ -178,9 +164,6 @@ app.post('/addComment', (req, res) => {
 app.get('/allMovie', (req, res) => {
     
     req.models.movie.all(function (err,movies) {
-        // console.log("movies");
-        // console.log(movies);
-        // res.send(comments);
         console.log("in");
         for(let i=0;i<10;i++){
             console.log(movies[i].title);

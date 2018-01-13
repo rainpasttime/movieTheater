@@ -40,22 +40,22 @@ $(document).ready(function() {
                     "\" class=\"recommend\">" +
                     "</a>"+
                     "<br/>" +
-                    "<p>名字："+
+                    "<p class=\"recommendDetails\">名字："+
                     like[tem].title +
-                    "</p>" +
-                    "<p>导演：" +
+                    "<br>" +
+                    "导演：" +
                     like[tem].directors +
-                    "</p>" +
-                    "<p>主演：" +
+                    "<br>" +
+                    "主演：" +
                     like[tem].casts +
-                    "</p>" +
-                    "<p>上映时间：" +
+                    "<br>" +
+                    "上映时间：" +
                     like[tem].year +
-                    "</p>" +
-                    "<p>评分：" +
+                    "<br>" +
+                    "评分：" +
                     like[tem].rating +
-                    "</p>" +
-                    "<p>国家：" +
+                    "<br" +
+                    "国家：" +
                     like[tem].area +
                     "</p>" +
                     "</div>"
@@ -71,10 +71,6 @@ $(document).ready(function() {
 
         }
     });
-
-    // $("#hoverDisplay").mouseenter(function(){
-    //
-    // })
 });
 $("#combnt").click(function(){
         let href = location.href;
@@ -91,20 +87,9 @@ $("#combnt").click(function(){
             let comments = data.comments;
             let add = "<p>"+comments+"</p><hr/>"
             $("#recommend").append(add);
+            $("#addComment").val("");
         }
     });
 });
-//上搜索栏的搜索事件实现
-$("#searchButton").click(function(){
-    let searchContention = $("#searchContention").val();
-    $.ajax({
-        type: "post",
-        url: "http://localhost:3000/search",
-        dataType: "json",
-        data: {data:searchContention},
-        success: function (data) {
-            displayMovie(data);
-        }
-    });
-});
+
 

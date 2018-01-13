@@ -57,7 +57,6 @@ function displayMovie(data){
         $("#typeAdd").html(add);
     }
     else if(data.length===0){
-        alert("NULL");
     }
 }
 
@@ -127,4 +126,9 @@ $("#allmovie").click(function(){
             displayMovie(part);
         }
     });
+});
+$('#searchContention').bind('keypress', function (event) { 
+    if (event.keyCode == "13") {  
+        $("#searchButton").click();      
+    }
 });
