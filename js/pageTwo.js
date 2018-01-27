@@ -30,7 +30,7 @@ $(document).ready(function() {
                 index[i] = one;
             }
             let likeAppend="";
-            alert("One");
+            // alert("One");
             for(let i=0;i<4;i++){
                 // alert("i");
                 let tem=index[i];
@@ -63,7 +63,7 @@ $(document).ready(function() {
                     "</p>" +
                     "</div>"
             }
-            alert("two");
+            // alert("two");
             $("#otherMovie").html(likeAppend);
             let comments = data.comments;
             let commentAppend = "";
