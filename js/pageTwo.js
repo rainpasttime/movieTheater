@@ -9,7 +9,7 @@ $(document).ready(function() {
         dataType: "json",
         data: {data:id},
         success: function (data) {
-            let details = data.details[0];
+            let details = data.details;
             let image = "<img src=\""+details.image+"\""+" class=\"MovieP\" >"
             $("#BigPoster").html(image);
             $("#name").html("名字：  "+details.title);
@@ -19,17 +19,20 @@ $(document).ready(function() {
             $("#nation").html("国家：  "+details.area);
             $("#play").html(details.play);
             let like=data.like;
-            let length = 4<like.length?4:like.length;
+            // let length = 4<like.length?4:like.length;
             let index=[];
-            for(let i=0;i<length;i++) {
-                let tem = like.length-1+1;
+            //index中存储的是下标，随机选择likeMovie中的任意四个下标
+            for(let i=0;i<4;i++) {
+                let tem = like.length;
                 let one = Math.floor(Math.random() * tem + 1);
                 while(index.indexOf(one)!==-1)
                     one = Math.floor(Math.random() * tem + 1);
                 index[i] = one;
             }
             let likeAppend="";
-            for(let i=0;i<length;i++){
+            alert("One");
+            for(let i=0;i<4;i++){
+                // alert("i");
                 let tem=index[i];
                 likeAppend+="<div class=\"col-md-3 recommend\">" +
                     "<a href=\"pageTwo.html?id="+
@@ -60,9 +63,13 @@ $(document).ready(function() {
                     "</p>" +
                     "</div>"
             }
+            alert("two");
             $("#otherMovie").html(likeAppend);
             let comments = data.comments;
             let commentAppend = "";
+            // for(let i=0;i<comments.length;i++){
+            //     alert(comments[i]);
+            // }
             for(let i=0;i<comments.length;i++){
                 let tem = "<p>"+comments[i]+"</p><hr/>";
                 commentAppend+=tem;

@@ -111,32 +111,38 @@ app.post('/search', (req, res) => {
 
 app.post('/pageTwo', (req, res) => {
     let searchID = req.body.data;
+    //查询当前页面的电影的详情
     req.models.movie.find({id:searchID},function (err,movies) {
         if(err) console.log("error...One");
         else {
+            //查询跟当前页面电影的类型编号
             req.models.movie_genre.find({movie_id:searchID},function (err,genreID) {
                 if(err) console.log(err);
                 let genreSet = [];
                 for(let i = 0;i<genreID.length;i++)
                     genreSet.push(genreID[i].genre_id);
-                console.log("One!!!");
-                console.log(genreSet);
+                // console.log(genreSet);
+                //在movie_genre中找到与当前电影相同类型的电影的id
                 req.models.movie_genre.find({genre_id:genreSet},function(err,movieID){
                     if(err) console.log(err);
                     let movieSet = [];
                     for(let i = 0;i<movieID.length;i++)
                         movieSet.push(movieID[i].movie_id);
+                    //根据上一层的电影ID找到电影的详情
                     req.models.movie.find({id:movieSet},function(err,likeMovie){
                         if(err) console.log(err);
                         console.log("likeMovie");
-                        console.log(likeMovie[0].title);
+                        for(let i=0;i<likeMovie.length;i++){
+                            console.log(likeMovie[i].title);
+                        }
+                        //在评论页面找到当前页面电影的评论
                         req.models.comment.find({id:searchID},function(err,comments){
                             let arrayOfC = [];
                             for(let i=0;i<comments.length;i++){
                                 arrayOfC.push(comments[i].comments);
                             }
                             console.log(arrayOfC);
-                            res.send({details:movies,like:likeMovie,comments:arrayOfC});
+                            res.send({details:movies[0],like:likeMovie,comments:arrayOfC});
                         });
                     });
                 });
