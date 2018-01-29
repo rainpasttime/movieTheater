@@ -4,10 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Movie Theater</title>
     <!--轮播图-->
-	<link rel="stylesheet" type="text/css" href="./css/normalize.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="./css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="./css/htmleaf-demo.css">
 	<link href="./css/main.min.css" rel="stylesheet" type="text/css">
-	<link href="./css/ma5slider.min.css" rel="stylesheet" type="text/css">
+	<link href="./css/ma5slider.min.css" rel="stylesheet" type="text/css"> -->
     <!--3D-transform电影展示动画引用-->
     <link rel="stylesheet" type="text/css" href="./css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="./css/demo.css" />
@@ -59,7 +59,7 @@
     </div>
 </nav>
     <!--下方内容-->
-    <div class="row container-fluid" style="margin-top: 50px">
+    <div class="row container-fluid" style="margin-top: 100px">
         <!--右方分类侧边栏-->
         <div class="col-md-2">
             <div class="nav fixLeft" style="background-color: #404040;height:580px">
@@ -101,19 +101,31 @@
             </div>
         </div>
         <div class="col-md-10">
-            <!--轮播图-->
-            <div class="row">
+            <div class="row" style="margin-top: 100px margin-left:50px">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
-                    <br id="anim-fade">
-                    <div id="example-03" class="ma5slider outside-navs outside-dots horizontal-navs horizontal-dots anim-fade">
-                        <div class="slides">
-                            <a href="#"><img src="./img/01.jpg" alt="" class="slider"></a>
-                            <a href="#"><img src="./img/02.jpg" alt="" class="slider"></a>
-                            <a href="#"><img src="./img/03.jpg" alt="" class="slider"></a>
-                        </div>
-                    </div>
-                </div>
+                    <!--轮播图-->
+                    <div id="myCarousel" class="carousel slide" style="width:100%;">  
+                        <!-- 轮播（Carousel）小圆圈 -->  
+                        <ol class="carousel-indicators">  
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>  
+                            <li data-target="#myCarousel" data-slide-to="1"></li>  
+                            <li data-target="#myCarousel" data-slide-to="2"></li>  
+                        </ol>     
+                        <!-- 轮播（Carousel）项目 -->  
+                        <div class="carousel-inner">  
+                            <div id="pic0" class="item active">  
+                                <img src="./img/01.jpg" alt="First slide">  
+                            </div>  
+                            <div id="pic1" class="item">  
+                                <img src="./img/02.jpg" alt="Second slide">  
+                            </div>  
+                            <div id="pic2" class="item">  
+                                <img src="./img/03.jpg" alt="Third slide">  
+                            </div>  
+                        </div>  
+                    </div> 
+                </div>  
                 <div class="col-md-1"></div>
             </div>
             <!--右方电影展示-->
@@ -282,5 +294,5 @@
 <script src="./js/jquery-ui.min.js"></script>
 <script src="./js/jquery.ui.touch-punch.min.js"></script>
 <script src="./js/functions.js"></script>
-<script src="./js/ma5slider.min.js"></script>
+<!-- <script src="./js/ma5slider.min.js"></script> -->
 <script src="./js/index.js"></script>

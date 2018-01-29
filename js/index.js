@@ -132,3 +132,27 @@ $('#searchContention').bind('keypress', function (event) {
         $("#searchButton").click();      
     }
 });
+let i=0;  
+let c = null;  
+    c = setTimeout(carousel,3000);//开始执行  
+function carousel()  
+{  
+      
+   clearTimeout(c);//清除定时器  
+    
+  $("#pic"+i).removeClass("active");  
+  $("#pic"+(i+1)).addClass("active");  
+  i++;  
+  $("ol li").removeClass("active");  
+  $("ol li:eq("+i+")").addClass("active");  
+    
+  if(i>2){  
+    $("#pic"+(i-1)).removeClass("active");  
+    $("#pic0").addClass("active");  
+    i=0;  
+    $("ol li:eq("+i+")").addClass("active");  
+    
+  }  
+   c = setTimeout(carousel,3000); //设定定时器，循环执行               
+}   
+  
