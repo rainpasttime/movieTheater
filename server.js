@@ -121,7 +121,6 @@ app.post('/pageTwo', (req, res) => {
                 let genreSet = [];
                 for(let i = 0;i<genreID.length;i++)
                     genreSet.push(genreID[i].genre_id);
-                // console.log(genreSet);
                 //在movie_genre中找到与当前电影相同类型的电影的id
                 req.models.movie_genre.find({genre_id:genreSet},function(err,movieID){
                     if(err) console.log(err);
@@ -131,17 +130,14 @@ app.post('/pageTwo', (req, res) => {
                     //根据上一层的电影ID找到电影的详情
                     req.models.movie.find({id:movieSet},function(err,likeMovie){
                         if(err) console.log(err);
-                        console.log("likeMovie");
-                        for(let i=0;i<likeMovie.length;i++){
-                            console.log(likeMovie[i].title);
-                        }
+                        console.log("likeMovie length:  "+likeMovie.length.toString());
                         //在评论页面找到当前页面电影的评论
                         req.models.comment.find({id:searchID},function(err,comments){
                             let arrayOfC = [];
                             for(let i=0;i<comments.length;i++){
                                 arrayOfC.push(comments[i].comments);
                             }
-                            console.log(arrayOfC);
+                            console.log("comments length:  "+arrayOfC.length.toString());
                             res.send({details:movies[0],like:likeMovie,comments:arrayOfC});
                         });
                     });
@@ -164,17 +160,6 @@ app.post('/addComment', (req, res) => {
         console.log("comments");
         console.log(comments);
         res.send(comments);
-    });
-});
-
-app.get('/allMovie', (req, res) => {
-    
-    req.models.movie.all(function (err,movies) {
-        console.log("in");
-        for(let i=0;i<10;i++){
-            console.log(movies[i].title);
-        }
-        res.send(movies);
     });
 });
 

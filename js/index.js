@@ -108,22 +108,10 @@ $("#searchButton").click(function(){
         dataType: "json",
         data: {data:searchContention},
         success: function (data) {
-            displayMovie(data);
-        }
-    });
-});
-//点击全部电影按钮
-$("#allmovie").click(function(){
-    $.ajax({
-        type: "get",
-        url: "http://localhost:3000/allMovie",
-        dataType: "json",
-        success: function (data) {
-            let part = [];
-            for(let i=0;i<50;i++){
-                part.push(data[i]);
+            if(data.length===0){
+                alert("抱歉暂时没有这部电影");
             }
-            displayMovie(part);
+            displayMovie(data);
         }
     });
 });
@@ -132,6 +120,8 @@ $('#searchContention').bind('keypress', function (event) {
         $("#searchButton").click();      
     }
 });
+
+//轮播图的自动播放
 let i=0;  
 let c = null;  
     c = setTimeout(carousel,3000);//开始执行  

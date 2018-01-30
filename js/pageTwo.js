@@ -19,7 +19,6 @@ $(document).ready(function() {
             $("#nation").html("国家：  "+details.area);
             $("#play").html(details.play);
             let like=data.like;
-            // let length = 4<like.length?4:like.length;
             let index=[];
             //index中存储的是下标，随机选择likeMovie中的任意四个下标
             for(let i=0;i<4;i++) {
@@ -30,9 +29,7 @@ $(document).ready(function() {
                 index[i] = one;
             }
             let likeAppend="";
-            // alert("One");
             for(let i=0;i<4;i++){
-                // alert("i");
                 let tem=index[i];
                 likeAppend+="<div class=\"col-md-3 recommend\">" +
                     "<a href=\"pageTwo.html?id="+
@@ -63,13 +60,9 @@ $(document).ready(function() {
                     "</p>" +
                     "</div>"
             }
-            // alert("two");
             $("#otherMovie").html(likeAppend);
             let comments = data.comments;
             let commentAppend = "";
-            // for(let i=0;i<comments.length;i++){
-            //     alert(comments[i]);
-            // }
             for(let i=0;i<comments.length;i++){
                 let tem = "<p>"+comments[i]+"</p><hr/>";
                 commentAppend+=tem;
