@@ -6,12 +6,12 @@ app.use(express.static(__dirname+'/'));
 app.use(bodyParser.urlencoded({ extended: true }));
 let orm = require("orm");
 
-orm.connect('sqlite:/home/rain/movieTheater/DB/movies.db', function(err, db) {
+orm.connect('sqlite:DB/movies.db', function(err, db) {
     if (err) return console.error('Connection error: ' + err);
     else console.log('success!');
 });
 
-app.use(orm.express('sqlite:/home/rain/movieTheater/DB/movies.db',{
+app.use(orm.express('sqlite:DB/movies.db',{
     define: function (db, models, next) {
         models.movie = db.define("movie", {
             id: Number,
